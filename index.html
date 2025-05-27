@@ -50,8 +50,10 @@
 
     /* Modo noturno */
     body.night {
-      background: linear-gradient(135deg, var(--cor-fundo-noite-inicio), var(--cor-fundo-noite-meio), var(--cor-fundo-noite-fim));
+      background: linear-gradient(135deg, var(--cor-fundo-noite-inicio), var(--cor-fundo-noite-meio), var(--cor-fundo-noite-fim)) !important;
       color: var(--cor-texto-noite-principal);
+      background-color: linear-gradient(135deg, var(--cor-fundo-noite-inicio), var(--cor-fundo-noite-meio), var(--cor-fundo-noite-fim)) !important;
+      border-radius: 20px;
     }
 
     .container {
@@ -88,6 +90,7 @@
         0 0 50px 25px rgba(173, 216, 230, 0.15);
       filter: drop-shadow(0 0 15px var(--glow-color-noite));
       color: var(--cor-texto-noite-principal);
+      border-radius: 20px;
     }
 
     h1 {
@@ -259,6 +262,8 @@
         moon.classList.add('active');
         container.classList.remove('glowing');
         body.classList.add('night');
+         body.style.backgroundColor = '#0d1b2a !important' ;
+
       } else {
         // Muda para dia
         moon.classList.remove('active');
