@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Para Você</title>
+  <style>
+    :root {
+      --cor-fundo-inicio: #ff9a9e;
+      --cor-fundo-meio: #fad0c4;
+      --cor-fundo-fim: #fad0c4;
+      --cor-texto-principal: #4b2e39;
+      --cor-texto-secundario: #6d435a;
+      --cor-sombra: rgba(255, 152, 147, 0.6);
+      --cor-hover: #c94f55;
+      --sol-amarelo: #ffcc33;
+      --sol-laranja: #ff9933;
+      --sol-luz: #fff176;
+      --glow-color: rgba(255, 204, 51, 0.7);
+
+      /* cores noturnas */
+      --cor-fundo-noite-inicio: #0d1b2a;
+      --cor-fundo-noite-meio: #1b263b;
+      --cor-fundo-noite-fim: #415a77;
+      --cor-texto-noite-principal: #e0e6f1;
+      --cor-texto-noite-secundario: #a3b1c6;
+      --cor-sombra-noite: rgba(65, 90, 119, 0.7);
+      --glow-color-noite: rgba(173, 216, 230, 0.7); /* azul claro */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--cor-fundo-inicio), var(--cor-fundo-meio), var(--cor-fundo-fim));
+      color: var(--cor-texto-principal);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      user-select: none;
+      flex-direction: column;
+      transition: background 0.7s ease, color 0.7s ease;
+    }
+
+    /* Modo noturno */
+    body.night {
+      background: linear-gradient(135deg, var(--cor-fundo-noite-inicio), var(--cor-fundo-noite-meio), var(--cor-fundo-noite-fim));
+      color: var(--cor-texto-noite-principal);
+    }
+
+    .container {
+      background: rgba(255 255 255 / 0.8);
+      max-width: 400px;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px var(--cor-sombra);
+      cursor: pointer;
+      transition: box-shadow 0.5s ease, filter 0.5s ease, background 0.7s ease, color 0.7s ease;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      color: var(--cor-texto-principal);
+    }
+    .container:hover,
+    .container:focus-within {
+      box-shadow: 0 12px 30px var(--cor-hover);
+    }
+    .container.glowing {
+      box-shadow:
+        0 0 10px 3px var(--glow-color),
+        0 0 30px 10px rgba(255, 204, 51, 0.35),
+        0 0 60px 25px rgba(255, 204, 51, 0.2);
+      filter: drop-shadow(0 0 15px var(--glow-color));
+      transition: box-shadow 0.7s ease, filter 0.7s ease;
+    }
+    /* Container no modo noite */
+    body.night .container {
+      background: rgba(29 39 56 / 0.85);
+      box-shadow:
+        0 0 10px 3px var(--glow-color-noite),
+        0 0 25px 10px rgba(173, 216, 230, 0.3),
+        0 0 50px 25px rgba(173, 216, 230, 0.15);
+      filter: drop-shadow(0 0 15px var(--glow-color-noite));
+      color: var(--cor-texto-noite-principal);
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 1.9rem;
+      margin-bottom: 15px;
+      color: inherit;
+      position: relative;
+      display: inline-block;
+      outline: none;
+    }
+    .secret {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      color: var(--cor-texto-secundario);
+      font-size: 1.1rem;
+      margin-top: 15px;
+      line-height: 1.4;
+      transition: opacity 0.5s ease, max-height 0.5s ease;
+    }
+    .container:hover .secret,
+    .container:focus-within .secret,
+    h1:hover + .secret,
+    h1:focus + .secret,
+    h1:active + .secret {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    /* Ajusta cor da mensagem secreta no modo noite */
+    body.night .secret {
+      color: var(--cor-texto-noite-secundario);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: var(--cor-texto-secundario);
+      font-style: italic;
+      user-select: text;
+      transition: color 0.7s ease;
+    }
+    body.night footer {
+      color: var(--cor-texto-noite-secundario);
+    }
+
+    /* Sol estilizado com brilho e raios mais evidentes */
+    .sun, .moon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 25px;
+      cursor: pointer;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      user-select: none;
+      filter: drop-shadow(0 0 6px rgba(255, 204, 51, 0.8));
+    }
+    .sun .rays line {
+      stroke-width: 4;
+      stroke-linecap: round;
+      transition: stroke 0.5s ease, filter 0.5s ease;
+      filter: drop-shadow(0 0 1px var(--sol-laranja));
+      stroke: var(--sol-laranja);
+    }
+    .sun .core {
+      fill: var(--sol-amarelo);
+      filter: drop-shadow(0 0 5px var(--sol-luz));
+      transition: filter 0.5s ease;
+    }
+    /* Estado ativo do sol (começa ativo) */
+    .sun.active {
+      transform: rotate(15deg) scale(1.15);
+      filter: drop-shadow(0 0 12px var(--sol-luz));
+    }
+    .sun.active .rays line {
+      stroke: var(--sol-luz);
+      filter: drop-shadow(0 0 2px var(--sol-luz));
+    }
+    .sun.active .core {
+      filter: drop-shadow(0 0 2px var(--sol-luz));
+    }
+
+    /* Lua estilizada */
+    .moon {
+      fill: #f0e9d2;
+      filter: drop-shadow(0 0 8px #a3b1c6);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+    .moon path {
+      fill: #f0e9d2;
+    }
+    /* Lua ativa com brilho */
+    .moon.active {
+      transform: rotate(-15deg) scale(1.15);
+      filter: drop-shadow(0 0 15px #a3b1c6);
+    }
+
+    /* Responsivo para celulares */
+    @media (max-width: 420px) {
+      .container {
+        padding: 25px 20px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .secret {
+        font-size: 1rem;
+        margin-top: 12px;
+      }
+      .sun, .moon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sol e Lua em SVG, mas só um aparece por vez -->
+  <svg class="sun active" tabindex="0" aria-label="Sol interativo" role="button" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" >
+    <circle class="core" cx="40" cy="40" r="20" />
+    <g class="rays" stroke-width="3" stroke-linecap="round" stroke="var(--sol-laranja)">
+      <line x1="40" y1="5" x2="40" y2="20" />
+      <line x1="40" y1="60" x2="40" y2="75" />
+      <line x1="5" y1="40" x2="20" y2="40" />
+      <line x1="60" y1="40" x2="75" y2="40" />
+      <line x1="15" y1="15" x2="28" y2="28" />
+      <line x1="52" y1="52" x2="65" y2="65" />
+      <line x1="15" y1="65" x2="28" y2="52" />
+      <line x1="52" y1="28" x2="65" y2="15" />
+    </g>
+  </svg>
+
+  <svg class="moon" tabindex="0" aria-label="Lua interativa" role="button" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <path d="M55 40a20 20 0 1 1-30-18 14 14 0 1 0 30 18z" />
+  </svg>
+
+  <div class="container glowing" tabindex="0" role="button" aria-label="Mensagem para você">
+    <h1 tabindex="0" aria-describedby="secret-message">
+      Do nascer ao pôr do sol,
+    </h1>
+    <p class="secret" id="secret-message">
+      há pensamentos que cruzam meu caminho — e quase sempre são sobre você.
+    </p>
+    <footer>— Com carinho, Samuel</footer>
+  </div>
+
+  <script>
+    const sun = document.querySelector('.sun');
+    const moon = document.querySelector('.moon');
+    const container = document.querySelector('.container');
+    const body = document.body;
+
+
+    container.addEventListener('click', () => {
+  // Se o sol estiver ativo (modo dia), alterna para a lua
+  if (sun.classList.contains('active')) {
+    toggleEffects();
+  }
+});
+
+    function toggleEffects() {
+      const isDay = sun.classList.contains('active');
+      if (isDay) {
+        // Muda para noite
+        sun.classList.remove('active');
+        sun.style.display = 'none';
+        moon.style.display = 'block';
+        moon.classList.add('active');
+        container.classList.remove('glowing');
+        body.classList.add('night');
+      } else {
+        // Muda para dia
+        moon.classList.remove('active');
+        moon.style.display = 'none';
+        sun.style.display = 'block';
+        sun.classList.add('active');
+        container.classList.add('glowing');
+        body.classList.remove('night');
+      }
+    }
+
+    sun.addEventListener('click', toggleEffects);
+    moon.addEventListener('click', toggleEffects);
+
+    // Ativa também com teclado (Enter e Espaço) para sol e lua
+    [sun, moon].forEach(element => {
+      element.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleEffects();
+        }
+      });
+    });
+
+    // Inicialmente o sol já está ativo e iluminando (container com glow)
+    // Nenhuma ação extra necessária aqui pois o CSS já aplica os estilos
+  </script>
+</body>
+</html>
