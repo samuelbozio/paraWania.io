@@ -3,182 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motivos pra te amar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Nosso Mural do Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-yellow: #fef7c3; 
-            --soft-pink: #fce4ec; 
-            --soft-green: #e1f5e6; 
-            --soft-blue: #e0f7fa; 
-            --soft-purple: #f3e5f5; 
-            --soft-orange: #ffe0b2; 
-            --text-color: #333333;
-            --font-stack: 'Inter', sans-serif;
-            --accent-color: #4CAF50; 
-            --dark-background: #121212;
+            --pastel-pink: #ffb3d9;
+            --pastel-blue: #b3d9ff;
+            --pastel-green: #b3ffb3;
+            --pastel-yellow: #ffff99;
+            --pastel-purple: #d9b3ff;
+            --pastel-orange: #ffcc99;
+            --pastel-mint: #99ffcc;
+            --pastel-coral: #ff9999;
+            --warm-white: #fefefe;
+            --soft-gray: #f5f7fa;
+            --dark-text: #2d3748;
+            --accent-primary: #667eea;
+            --accent-secondary: #764ba2;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #bbbbbb;
-            background-image: radial-gradient(circle at center, rgba(255,255,255,0.02) 1px, transparent 0),
-            radial-gradient(circle at center, rgba(0,0,0,0.05) 1px, transparent 0);
-            background-size: 20px 20px;
-            background-repeat: repeat;
-            color: white;
-            font-family: var(--font-stack);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
             overflow-x: hidden;
-            padding-top: 80px;
         }
 
-        h1.title {
-            position: fixed;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--warm-white);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .mural-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .section {
+            background: var(--warm-white);
+            padding: 30px;
+            box-shadow: 0 20px 40px var(--shadow-medium);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            padding: 15px 0;
-            background-color: var(--dark-background);
-            color: #E0E0E0;
-            font-family: var(--font-stack);
-            font-weight: 300;
-            font-size: 1.5em;
-            text-align: center;
-            z-index: 50;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
         }
 
-        #postit-container {
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-primary);
+        }
+
+        .posts-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            gap: 20px;
+            justify-content: flex-start;
             align-items: flex-start;
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .posts-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .posts-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .posts-container::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
         }
 
         .post-it {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             padding: 15px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
             position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 4px 15px var(--shadow-light);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 4px;
-            cursor: pointer;
             text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-            overflow: hidden;
+            transform: rotate(-1deg);
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+
+        .post-it:nth-child(2n) {
+            transform: rotate(1deg);
+        }
+
+        .post-it:nth-child(3n) {
+            transform: rotate(-0.5deg);
+        }
+
+        .post-it:nth-child(4n) {
+            transform: rotate(1.5deg);
         }
 
         .post-it:hover {
-            transform: translateY(-2px) rotate(0deg) scale(1.02);
-            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 1;
+            transform: translateY(-5px) rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+            z-index: 10;
         }
 
-        .post-it.soft-yellow { background-color: var(--soft-yellow); transform: rotate(-0.5deg); }
-        .post-it.soft-pink { background-color: var(--soft-pink); transform: rotate(1.5deg); }
-        .post-it.soft-green { background-color: var(--soft-green); transform: rotate(-1.2deg); }
-        .post-it.soft-blue { background-color: var(--soft-blue); transform: rotate(0.8deg); }
-        .post-it.soft-purple { background-color: var(--soft-purple); transform: rotate(-1.8deg); }
-        .post-it.soft-orange { background-color: var(--soft-orange); transform: rotate(1.0deg); }
+        .post-it.pink { background: var(--pastel-pink); }
+        .post-it.blue { background: var(--pastel-blue); }
+        .post-it.green { background: var(--pastel-green); }
+        .post-it.yellow { background: var(--pastel-yellow); }
+        .post-it.purple { background: var(--pastel-purple); }
+        .post-it.orange { background: var(--pastel-orange); }
+        .post-it.mint { background: var(--pastel-mint); }
+        .post-it.coral { background: var(--pastel-coral); }
 
-        .post-it-content {
-            font-family: var(--font-stack);
-            font-weight: 400;
-            font-size: 1em;
-            color: var(--text-color);
+        .post-content {
+            font-size: 0.9rem;
+            color: var(--dark-text);
             line-height: 1.4;
-            user-select: none;
+            font-weight: 400;
+            word-break: break-word;
         }
 
-        .post-it-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 2px;
-        }
-
-        .post-it-number {
-            font-family: var(--font-stack);
-            font-weight: 600;
-            font-size: 1.1em;
-            color: var(--text-color);
+        .post-number {
             position: absolute;
-            top: 5px;
-            left: 5px;
-            opacity: 0.5;
-            z-index: 2;
-            background-color: rgba(255, 255, 255, 0.7);
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-text);
             padding: 2px 6px;
-            border-radius: 3px;
-        }
-        
-        #next-button {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            z-index: 100;
-            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-            font-family: var(--font-stack);
-            font-weight: 700;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
-        #next-button:hover {
-            transform: scale(1.05);
-            background-color: #5cb85c;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-        }
-
-        #next-button:active {
-            transform: scale(0.98);
-        }
-
-        #final-message {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Estilos específicos para momentos */
+        .momento-post {
             width: 100%;
             height: 100%;
-            background-color: rgba(26, 26, 26, 0.98);
-            color: var(--accent-color);
-            font-family: var(--font-stack);
-            font-weight: 300;
-            font-size: 2.5em;
-            text-align: center;
-            padding-top: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .momento-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .momento-image {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            margin: 5px 0;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: var(--dark-text);
+            color: white;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            max-width: 250px;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tooltip.show {
+            opacity: 1;
         }
 
         .modal {
@@ -188,62 +242,131 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 30px;
+            top: 30px;
+            right: 40px;
             color: white;
             font-size: 40px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        
-        @media (max-width: 600px) {
+
+        .close-modal:hover {
+            transform: scale(1.2);
+            color: var(--accent-primary);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(-1deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .mural-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
             .post-it {
                 width: 140px;
                 height: 140px;
-                padding: 10px;
-                font-size: 0.8em;
+                padding: 12px;
             }
-            #postit-container {
-                gap: 15px;
-            }
-            #next-button {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                bottom: 15px;
-                right: 15px;
-            }
-            h1.title {
-                font-size: 1.2em;
-            }
-            #final-message {
-                font-size: 1.8em;
+            
+            .posts-container {
+                max-height: 500px;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <h1 class="">Motivos nos quais eu te amo (muito)</h1>
-    <div id="postit-container"></div>
-    <button id="next-button" title="Clique para o próximo motivo">➕</button>
-    
+    <div class="header">
+        <h1 class="main-title">💕 Nosso Mural do Amor 💕</h1>
+        <p class="subtitle">Motivos e momentos especiais guardados com carinho</p>
+    </div>
+
+    <div class="mural-container">
+        <!-- Seção Motivos -->
+        <div class="section">
+            <h2 class="section-title">💖 Motivos para te Amar</h2>
+            <div class="posts-container" id="motivos-container"></div>
+        </div>
+
+        <!-- Seção Momentos -->
+        <div class="section">
+            <h2 class="section-title">📸 Momentos Especiais</h2>
+            <div class="posts-container" id="momentos-container"></div>
+        </div>
+    </div>
+
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
         <img id="modalImage" class="modal-content">
     </div>
+
+    <div class="tooltip" id="tooltip"></div>
 
     <script>
         const items = [
@@ -309,83 +432,143 @@
             "Simplesmente porque é a Wania!",
         ];
 
-        let itemIndex = 0;
-        const container = document.getElementById('postit-container');
-        const nextButton = document.getElementById('next-button');
-        const finalMessage = document.getElementById('final-message');
+        const momentos = [
+            {
+                title: "Vavonaldo",
+                image: "nenes.png",
+                description: "O dia que mudou tudo, quando nossos olhares se cruzaram e soubemos que seria especial."
+            },
+            {
+                title: "Nossa Primeira Viagem",
+                image: "nois.jpg", 
+                description: "Descobrimos o mundo juntos e criamos memórias que levaremos para sempre."
+            },
+            {
+                title: "Nami Zóio",
+                image: "nene.png",
+                description: "Cada momento ao seu lado é uma celebração do amor que sentimos um pelo outro."
+            },
+            {
+                title: "Aniversário Dela",
+                image: "",
+                description: "Comemorando mais um ano de vida da pessoa mais especial do meu mundo."
+            },
+            {
+                title: "Domingo Preguiçoso",
+                image: "",
+                description: "Aqueles domingos perfeitos sem fazer nada, apenas curtindo a companhia um do outro."
+            },
+            {
+                title: "Jantar Romântico",
+                image: "",
+                description: "Uma noite especial com velas, boa comida e muitas risadas compartilhadas."
+            }
+        ];
+        
+        const motivosContainer = document.getElementById('motivos-container');
+        const momentosContainer = document.getElementById('momentos-container');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.querySelector('.close-modal');
-        const colors = ['soft-yellow', 'soft-pink', 'soft-green', 'soft-blue', 'soft-purple', 'soft-orange'];
+        const tooltip = document.getElementById('tooltip');
+        
+        const colors = ['pink', 'blue', 'green', 'yellow', 'purple', 'orange', 'mint', 'coral'];
 
-        function addPostIt() {
-            if (itemIndex >= items.length) {
-                nextButton.style.display = 'none';
-                finalMessage.style.display = 'block';
-                return;
-            }
-
-            const item = items[itemIndex];
-            const number = itemIndex + 1;
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            const postIt = document.createElement('div');
-            postIt.classList.add('post-it', randomColor);
-            
-            const isImage = item.match(/\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i) || 
-                           item.startsWith('http') ||
-                           item.startsWith('data:image');
-            
-            if (isImage) {
-                const img = document.createElement('img');
-                img.src = item;
-                img.alt = `Foto ${number}`;
-                img.classList.add('post-it-image');
-                img.onerror = function() {
-                    img.style.display = 'none';
-                    const errorText = document.createElement('p');
-                    errorText.classList.add('post-it-content');
-                    errorText.textContent = `Foto ${number} não carregada`;
-                    errorText.style.color = '#ff4444';
-                    postIt.appendChild(errorText);
-                };
+        function createMotivos() {
+            items.forEach((item, index) => {
+                const number = index + 1;
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 
-                postIt.innerHTML = `<span class="post-it-number">#${number}</span>`;
-                postIt.appendChild(img);
+                const postIt = document.createElement('div');
+                postIt.classList.add('post-it', randomColor);
                 
-                postIt.addEventListener('click', function() {
-                    modalImage.src = item;
-                    modal.style.display = 'flex';
-                });
-            } else {
-                postIt.innerHTML = `
-                    <span class="post-it-number">#${number}</span>
-                    <p class="post-it-content">${item}</p>
-                `;
-            }
+                const isImage = item.match(/\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i);
+                
+                if (isImage) {
+                    const img = document.createElement('img');
+                    img.src = item;
+                    img.alt = `Foto ${number}`;
+                    img.classList.add('momento-image');
+                    img.onerror = function() {
+                        img.style.display = 'none';
+                        const errorText = document.createElement('p');
+                        errorText.classList.add('post-content');
+                        errorText.textContent = `Foto ${number} não encontrada`;
+                        errorText.style.color = '#ff4444';
+                        postIt.appendChild(errorText);
+                    };
+                    
+                    postIt.innerHTML = `<span class="post-number">#${number}</span>`;
+                    postIt.appendChild(img);
+                    
+                    postIt.addEventListener('click', function() {
+                        modalImage.src = item;
+                        modal.style.display = 'flex';
+                    });
+                } else {
+                    postIt.innerHTML = `
+                        <span class="post-number">#${number}</span>
+                        <p class="post-content">${item}</p>
+                    `;
+                }
 
-            container.appendChild(postIt);
-            postIt.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            itemIndex++;
-            nextButton.title = (itemIndex < items.length) ? `Próximo: ${itemIndex + 1}` : 'Fim da lista!';
+                motivosContainer.appendChild(postIt);
+            });
         }
 
-        closeModal.addEventListener('click', function() {
-            modal.style.display = 'none';
+        function createMomentos() {
+            momentos.forEach((momento, index) => {
+                const number = index + 1;
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const postIt = document.createElement('div');
+                postIt.classList.add('post-it', randomColor);
+                
+                const momentoDiv = document.createElement('div');
+                momentoDiv.classList.add('momento-post');
+                
+                let content = `
+                    <span class="post-number">#${number}</span>
+                    <div class="momento-title">${momento.title}</div>
+                `;
+                
+                if (momento.image) {
+                    content += `<img src="${momento.image}" alt="${momento.title}" class="momento-image" onerror="this.style.display='none'">`;
+                }
+                
+                momentoDiv.innerHTML = content;
+                postIt.appendChild(momentoDiv);
+                
+                // Tooltip
+                postIt.addEventListener('mouseenter', function(e) {
+                    tooltip.textContent = momento.description;
+                    tooltip.classList.add('show');
+                });
+                
+                postIt.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.pageX + 15) + 'px';
+                    tooltip.style.top = (e.pageY - 40) + 'px';
+                });
+                
+                postIt.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+                
+                momentosContainer.appendChild(postIt);
+            });
+        }
+
+        // Event listeners
+        closeModal.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
         });
 
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
+        // Inicialização - carrega tudo automaticamente
         document.addEventListener('DOMContentLoaded', () => {
-            addPostIt();
+            createMotivos();
+            createMomentos();
         });
-
-        nextButton.addEventListener('click', addPostIt);
     </script>
 </body>
-</html> 
+</html>
