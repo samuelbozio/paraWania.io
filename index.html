@@ -1,1167 +1,1020 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Nosso Mural do Amor</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-
-      --pastel-pink: #ffb3d9;
-
-      --pastel-blue: #b3d9ff;
-
-      --pastel-green: #b3ffb3;
-
-      --pastel-yellow: #ffff99;
-
-      --pastel-purple: #d9b3ff;
-
-      --pastel-orange: #ffcc99;
-
-      --pastel-mint: #99ffcc;
-
-      --pastel-coral: #ff9999;
-
-      --warm-white: #fefefe;
-
-      --soft-gray: #f5f7fa;
-
-      --dark-text: #2d3748;
-
-      --accent-primary: #667eea;
-
-      --accent-secondary: #764ba2;
-
-      --shadow-light: rgba(0, 0, 0, 0.1);
-
-      --shadow-medium: rgba(0, 0, 0, 0.15);
-
-    }
-
-
-
-    * {
-
-      margin: 0;
-
-      padding: 0;
-
-      box-sizing: border-box;
-
-    }
-
-
-
-    body {
-
-      font-family: 'Poppins', sans-serif;
-
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-      min-height: 100vh;
-
-      padding: 20px;
-
-      overflow-x: hidden;
-
-    }
-
-
-
-    .header {
-
-      text-align: center;
-
-      margin-bottom: 40px;
-
-      animation: fadeInDown 1s ease-out;
-
-    }
-
-
-
-    .main-title {
-
-      font-size: 3rem;
-
-      font-weight: 700;
-
-      color: var(--warm-white);
-
-      margin-bottom: 10px;
-
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-      letter-spacing: -1px;
-
-    }
-
-
-
-    .subtitle {
-
-      font-size: 1.2rem;
-
-      color: rgba(255, 255, 255, 0.9);
-
-      font-weight: 300;
-
-    }
-
-
-
-    .mural-container {
-
-      max-width: 1400px;
-
-      margin: 0 auto;
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 40px;
-
-      animation: fadeInUp 1s ease-out 0.3s both;
-
-    }
-
-
-
-    .section {
-
-      background: var(--warm-white);
-
-      padding: 30px;
-
-      box-shadow: 0 20px 40px var(--shadow-medium);
-
-      backdrop-filter: blur(10px);
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
-
-
-    .section::before {
-
-      content: '';
-
-      position: absolute;
-
-      top: 0;
-
-      left: 0;
-
-      right: 0;
-
-      height: 6px;
-
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-
-    }
-
-
-
-    .section-title {
-
-      font-size: 1.8rem;
-
-      font-weight: 600;
-
-      color: var(--dark-text);
-
-      margin-bottom: 25px;
-
-      text-align: center;
-
-      position: relative;
-
-    }
-
-
-
-    .section-title::after {
-
-      content: '';
-
-      position: absolute;
-
-      bottom: -8px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      width: 60px;
-
-      height: 3px;
-
-      background: var(--accent-primary);
-
-    }
-
-
-
-    .posts-container {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 20px;
-
-      justify-content: flex-start;
-
-      align-items: flex-start;
-
-      max-height: 600px;
-
-      overflow-y: auto;
-
-      padding-right: 10px;
-
-    }
-
-
-
-    .posts-container::-webkit-scrollbar {
-
-      width: 6px;
-
-    }
-
-
-
-    .posts-container::-webkit-scrollbar-track {
-
-      background: #f1f1f1;
-
-    }
-
-
-
-    .posts-container::-webkit-scrollbar-thumb {
-
-      background: var(--accent-primary);
-
-    }
-
-
-
-    .post-it {
-
-      width: 160px;
-
-      height: 160px;
-
-      padding: 15px;
-
-      position: relative;
-
-      cursor: pointer;
-
-      transition: all 0.3s ease;
-
-      animation: slideIn 0.5s ease-out;
-
-      box-shadow: 0 4px 15px var(--shadow-light);
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-align: center;
-
-      transform: rotate(-1deg);
-
-    }
-
-
-
-    .post-it:nth-child(2n) {
-
-      transform: rotate(1deg);
-
-    }
-
-
-
-    .post-it:nth-child(3n) {
-
-      transform: rotate(-0.5deg);
-
-    }
-
-
-
-    .post-it:nth-child(4n) {
-
-      transform: rotate(1.5deg);
-
-    }
-
-
-
-    .post-it:hover {
-
-      transform: translateY(-5px) rotate(0deg) scale(1.05);
-
-      box-shadow: 0 15px 30px var(--shadow-medium);
-
-      z-index: 10;
-
-    }
-
-
-
-    .post-it.pink {
-      background: var(--pastel-pink);
-    }
-
-    .post-it.blue {
-      background: var(--pastel-blue);
-    }
-
-    .post-it.green {
-      background: var(--pastel-green);
-    }
-
-    .post-it.yellow {
-      background: var(--pastel-yellow);
-    }
-
-    .post-it.purple {
-      background: var(--pastel-purple);
-    }
-
-    .post-it.orange {
-      background: var(--pastel-orange);
-    }
-
-    .post-it.mint {
-      background: var(--pastel-mint);
-    }
-
-    .post-it.coral {
-      background: var(--pastel-coral);
-    }
-
-
-
-    .post-content {
-
-      font-size: 0.9rem;
-
-      color: var(--dark-text);
-
-      line-height: 1.4;
-
-      font-weight: 400;
-
-      word-break: break-word;
-
-    }
-
-
-
-    .post-number {
-
-      position: absolute;
-
-      top: 8px;
-
-      right: 8px;
-
-      background: rgba(255, 255, 255, 0.9);
-
-      color: var(--dark-text);
-
-      padding: 2px 6px;
-
-      font-size: 0.7rem;
-
-      font-weight: 600;
-
-    }
-
-
-
-    /* Estilos específicos para momentos */
-
-    .momento-post {
-
-      width: 100%;
-
-      height: 100%;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-    }
-
-
-
-    .momento-title {
-
-      font-weight: 600;
-
-      font-size: 0.85rem;
-
-      color: var(--dark-text);
-
-      margin-bottom: 8px;
-
-      line-height: 1.2;
-
-    }
-
-
-
-    .momento-image {
-
-      width: 100%;
-
-      height: 80px;
-
-      object-fit: cover;
-
-      margin: 5px 0;
-
-    }
-
-
-
-    .tooltip {
-
-      position: absolute;
-
-      background: var(--dark-text);
-
-      color: white;
-
-      padding: 12px 16px;
-
-      font-size: 0.85rem;
-
-      max-width: 250px;
-
-      z-index: 1000;
-
-      opacity: 0;
-
-      transition: opacity 0.3s ease;
-
-      pointer-events: none;
-
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-
-    }
-
-
-
-    .tooltip.show {
-
-      opacity: 1;
-
-    }
-
-
-
-    .modal {
-
-      display: none;
-
-      position: fixed;
-
-      top: 0;
-
-      left: 0;
-
-      width: 100%;
-
-      height: 100%;
-
-      background: rgba(0, 0, 0, 0.9);
-
-      z-index: 2000;
-
-      justify-content: center;
-
-      align-items: center;
-
-      backdrop-filter: blur(5px);
-
-    }
-
-
-
-    .modal-content {
-
-      max-width: 90%;
-
-      max-height: 90%;
-
-      object-fit: contain;
-
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-
-    }
-
-
-
-    .close-modal {
-
-      position: absolute;
-
-      top: 30px;
-
-      right: 40px;
-
-      color: white;
-
-      font-size: 40px;
-
-      cursor: pointer;
-
-      transition: all 0.3s ease;
-
-    }
-
-
-
-    .close-modal:hover {
-
-      transform: scale(1.2);
-
-      color: var(--accent-primary);
-
-    }
-
-
-
-    @keyframes fadeInDown {
-
-      from {
-
-        opacity: 0;
-
-        transform: translateY(-30px);
-
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-      }
-
-    }
-
-
-
-    @keyframes fadeInUp {
-
-      from {
-
-        opacity: 0;
-
-        transform: translateY(50px);
-
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-      }
-
-    }
-
-
-
-    @keyframes slideIn {
-
-      from {
-
-        opacity: 0;
-
-        transform: translateX(-20px) rotate(-5deg);
-
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform: translateX(0) rotate(-1deg);
-
-      }
-
-    }
-
-
-
-    @media (max-width: 1024px) {
-
-      .mural-container {
-
-        grid-template-columns: 1fr;
-
-        gap: 30px;
-
-      }
-
-
-
-      .main-title {
-
-        font-size: 2.5rem;
-
-      }
-
-    }
-
-
-
-    @media (max-width: 768px) {
-
-      body {
-
-        padding: 15px;
-
-      }
-
-
-
-      .main-title {
-
-        font-size: 2rem;
-
-      }
-
-
-
-      .section {
-
-        padding: 20px;
-
-      }
-
-
-
-      .post-it {
-
-        width: 140px;
-
-        height: 140px;
-
-        padding: 12px;
-
-      }
-
-
-
-      .posts-container {
-
-        max-height: 500px;
-
-        justify-content: center;
-
-      }
-
-    }
-  </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Mural do Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --pastel-pink: #ffb3d9;
+            --pastel-blue: #b3d9ff;
+            --pastel-green: #b3ffb3;
+            --pastel-yellow: #ffff99;
+            --pastel-purple: #d9b3ff;
+            --pastel-orange: #ffcc99;
+            --pastel-mint: #99ffcc;
+            --pastel-coral: #ff9999;
+            --warm-white: #fefefe;
+            --soft-gray: #f5f7fa;
+            --dark-text: #2d3748;
+            --accent-primary: #667eea;
+            --accent-secondary: #764ba2;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --parchment: #f5e9d4;
+            --ink-color: #3a2c1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--warm-white);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .mural-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            background: var(--warm-white);
+            padding: 30px;
+            box-shadow: 0 20px 40px var(--shadow-medium);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-primary);
+        }
+
+        /* Nova Sessão - Contagem Regressiva e Carta */
+        .countdown-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .countdown-container {
+            background: var(--warm-white);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow-medium);
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        .photo-countdown-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .photo-countdown-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .photo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            border: 15px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .countdown-display {
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-unit {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Estilo da Carta */
+        .letter-container {
+            background: var(--parchment);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path d="M0,0 L100,100 M100,0 L0,100" stroke="black" stroke-width="1"/></svg>');
+            pointer-events: none;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--ink-color);
+            padding-bottom: 15px;
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--ink-color);
+            font-weight: 700;
+        }
+
+        .letter-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--ink-color);
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        .letter-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: var(--ink-color);
+            text-align: justify;
+            padding: 0 10px;
+        }
+
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            text-align: right;
+            margin-top: 40px;
+            color: var(--ink-color);
+        }
+
+        /* Posts Container (mantido do original) */
+        .posts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+            align-items: flex-start;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .posts-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .posts-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .posts-container::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+        }
+
+        .post-it {
+            width: 160px;
+            height: 160px;
+            padding: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: rotate(-1deg);
+        }
+
+        .post-it:nth-child(2n) {
+            transform: rotate(1deg);
+        }
+
+        .post-it:nth-child(3n) {
+            transform: rotate(-0.5deg);
+        }
+
+        .post-it:nth-child(4n) {
+            transform: rotate(1.5deg);
+        }
+
+        .post-it:hover {
+            transform: translateY(-5px) rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+            z-index: 10;
+        }
+
+        .post-it.pink {
+            background: var(--pastel-pink);
+        }
+
+        .post-it.blue {
+            background: var(--pastel-blue);
+        }
+
+        .post-it.green {
+            background: var(--pastel-green);
+        }
+
+        .post-it.yellow {
+            background: var(--pastel-yellow);
+        }
+
+        .post-it.purple {
+            background: var(--pastel-purple);
+        }
+
+        .post-it.orange {
+            background: var(--pastel-orange);
+        }
+
+        .post-it.mint {
+            background: var(--pastel-mint);
+        }
+
+        .post-it.coral {
+            background: var(--pastel-coral);
+        }
+
+        .post-content {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            line-height: 1.4;
+            font-weight: 400;
+            word-break: break-word;
+        }
+
+        .post-number {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-text);
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Estilos específicos para momentos */
+        .momento-post {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .momento-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .momento-image {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            margin: 5px 0;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: var(--dark-text);
+            color: white;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            max-width: 250px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+            color: var(--accent-primary);
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px) rotate(-5deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(-1deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .mural-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .post-it {
+                width: 140px;
+                height: 140px;
+                padding: 12px;
+            }
+
+            .posts-container {
+                max-height: 500px;
+                justify-content: center;
+            }
+
+            .countdown-unit {
+                min-width: 70px;
+                padding: 15px;
+            }
+
+            .countdown-number {
+                font-size: 2.2rem;
+            }
+
+            .letter-content {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-timer {
+                gap: 10px;
+            }
+
+            .countdown-unit {
+                min-width: 60px;
+                padding: 10px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+
+            .letter-container {
+                padding: 20px;
+            }
+
+            .letter-content {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-  <div class="header">
-
-    <h1 class="main-title">💕 Nosso Mural do Amor 💕</h1>
-
-    <p class="subtitle">Motivos e momentos especiais guardados com carinho</p>
-
-  </div>
-
-
-
-  <div class="mural-container">
-
-    <!-- Seção Motivos -->
-
-    <div class="section">
-
-      <h2 class="section-title">💖 Motivos para te Amar</h2>
-
-      <div class="posts-container" id="motivos-container"></div>
-
+    <div class="header">
+        <h1 class="main-title">💕 Nosso Mural do Amor 💕</h1>
+        <p class="subtitle">Motivos e momentos especiais guardados com carinho</p>
     </div>
 
+    <div class="mural-container">
+        <!-- Seção Motivos -->
+        <div class="section">
+            <h2 class="section-title">💖 Motivos para te Amar</h2>
+            <div class="posts-container" id="motivos-container"></div>
+        </div>
 
-
-    <!-- Seção Momentos -->
-
-    <div class="section">
-
-      <h2 class="section-title">📸 Momentos Especiais</h2>
-
-      <div class="posts-container" id="momentos-container"></div>
-
+        <!-- Seção Momentos -->
+        <div class="section">
+            <h2 class="section-title">📸 Momentos Especiais</h2>
+            <div class="posts-container" id="momentos-container"></div>
+        </div>
     </div>
 
-  </div>
-
-
-
-  <div id="imageModal" class="modal">
-
-    <span class="close-modal">&times;</span>
-
-    <img id="modalImage" class="modal-content">
-
-  </div>
-
-
-
-  <div class="tooltip" id="tooltip"></div>
-
-
-
-  <script>
-
-    const items = [
-
-      "Tu é gentil e carismática.",
-
-      "Teu sorriso ilumina.",
-
-      "Amo teu jeito de ser.",
-
-      "A forma como tu cuida de quem ama.",
-
-      "Teu senso de humor.",
-
-      "A tua determinação em tudo que faz.",
-
-      "O som da tua risada e a tua gengivinha.",
-
-      "Tu é incrivelmente inteligente.",
-
-      "Teus abraços são o meu lugar favorito no mundo.",
-
-      "A maneira como tu me faz sentir amado e seguro.",
-
-      "Tua paixão pela vida é contagiante.",
-
-      "Tu me ensina algo novo todos os dias.",
-
-      "nenes.png",
-
-      "A tua paciência é admirável.",
-
-      "Teus olhos são lindos e expressivos.",
-
-      "Tu tem um coração enorme.",
-
-      "Eu amo conversar contigo sobre tudo e nada.",
-
-      "Tu me motiva a ser uma pessoa melhor.",
-
-      "Teu cheiro é o melhor do mundo.",
-
-      "nene.png",
-
-      "A tua sinceridade é rara e preciosa.",
-
-      "Tu é a minha melhor amiga e confidente.",
-
-      "Amo a tua voz.",
-
-      "Amo como tu te dedica a me ajudar",
-
-      "Me sinto completo ao teu lado.",
-
-      "Tu é linda e estiosa.",
-
-      "A nossa história é a minha favorita.",
-
-      "Teu jeito de enxergar a vida me encanta.",
-
-      "Me faz rir mesmo nos dias difíceis.",
-
-      "Tu é meu porto seguro, minha cúmplice.",
-
-      "Tu me inspira.",
-
-      "Tu é uma ótima mãe para os nossos filhos.",
-
-      "Gosto de como tu me olha.",
-
-      "Tu transforma o comum em extraordinário.",
-
-      "Amo acordar e ver tu ao meu lado.",
-
-      "Eu amo teu toque.",
-
-      "nois.jpg",
-
-      "Amo a cor que tu da pra vida das pessoas ao redor",
-
-      "Tu é o presente que eu nunca soube que precisava.",
-
-      "Amo viajar contigo.",
-
-      "Amo ficar em casa contigo.",
-
-      "Amo teu lado safada.",
-
-      "Amo tua firmeza.",
-
-      "Teu jeito de organizar as coisas.",
-
-      "Amo teu mexidão",
-
-      "Tu é minha pessoa favorita.",
-
-      "Me sinto livre para ser eu mesmo contigo.",
-
-      "Tu é a melhor companhia.",
-
-      "Amo a tua lealdade",
-
-      "Amo o jeito que tu lida com os desafios.",
-
-      "Teu abraço me cura.",
-
-      "Tu é única.",
-
-      "O jeito que você dança.",
-
-      "A tua dedicação aos teus projetos.",
-
-      "Tua capacidade de perdoar.",
-
-      "Tu é a minha alma gêmea.",
-
-      "Amo o silêncio confortável que temos juntos.",
-
-      "O teu carinho nos detalhes.",
-
-      "Tu é a minha maior aventura.",
-
-      "Simplesmente porque é a Wania!",
-
-    ];
-
-
-
-    const momentos = [
-      {
-        title: "A Aliança de Compromisso",
-        image: "aliancadecompromisso.jpeg",
-        description: "Passei meses me segurando pra não contar pro nenê, mas valeu a pena."
-      },
-      {
-        title: "Namizinha",
-        image: "nene.png",
-        description: "Nossa filha linda."
-      },
-      {
-        title: "Antônia parindo seus filhos",
-        image: "neneatoniaparindo.jpeg",
-        description: "Acompanhamos a gestação da Antoninha "
-      },
-      {
-        title: "Vavonaldo",
-        image: "nenes.png",
-        description: "Nosso filho peidorrágio."
-      },
-      {
-        title: "Nossa Primeira Viagem",
-        image: "nois.jpg",
-        description: "Fomos pra Tramanda e eu te pedi em namoro novamente, em meio ao mar."
-      },
-      {
-        title: "Nosso Primeiro Festival",
-        image: "nossoprimeirofestivaljuntos.jpeg",
-        description: "Turá, vimos Ney Matogrosso, Fresno, Alcione e Mano Brown"
-      },
-      {
-        title: "Primeira Vez Orquestra",
-        image: "priemireveznaorquestrajuntos.jpeg",
-        description: "Dininho me deu um ingresso de uma orquestra de aniversário"
-      },
-      {
-        title: "Primeira Foto Juntos",
-        image: "primeirafotojuntos.jpeg",
-        description: "Eu já tava gamado no dininho.."
-      },
-      {
-        title: "Primeira vez do Dininho a cavalo",
-        image: "primeiravezdoneneacavalo.jpeg",
-        description: "Linda, emo em lugares aleatórios"
-      },
-      {
-        title: "Primeiro Dia dos Namorados",
-        image: "primeirodiadosnamorados.jpeg",
-        description: "Nossa primeira celebração oficial do amor. Um dia cheio de carinho e surpresas."
-      },
-      {
-        title: "Primeiro Halloween",
-        image: "primeirohalloweenjuntos.jpeg",
-        description: "Nossas fantasias, nossas risadas e nossa primeira 'doce ou travessura' juntos."
-      },
-      {
-        title: "Primeiro Crossfit",
-        image: "primeirotorneiodecrossfitdonene.jpeg",
-        description: "O dia que ela superou limites, mostrando sua força e dedicação. Meu orgulho!"
-      },
-      {
-        title: "Quando fomos ao Abbey",
-        image: "quandofomosnoabbey.jpeg",
-        description: "O bar só tinha a gente, e era tudo o que eu precisava."
-      }
-    ];
-
-
-
-    const motivosContainer = document.getElementById('motivos-container');
-
-    const momentosContainer = document.getElementById('momentos-container');
-
-    const modal = document.getElementById('imageModal');
-
-    const modalImage = document.getElementById('modalImage');
-
-    const closeModal = document.querySelector('.close-modal');
-
-    const tooltip = document.getElementById('tooltip');
-
-
-
-    const colors = ['pink', 'blue', 'green', 'yellow', 'purple', 'orange', 'mint', 'coral'];
-
-
-
-    function createMotivos() {
-
-      items.forEach((item, index) => {
-
-        const number = index + 1;
-
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-
-
-        const postIt = document.createElement('div');
-
-        postIt.classList.add('post-it', randomColor);
-
-
-
-        const isImage = item.match(/\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i);
-
-
-
-        if (isImage) {
-
-          const img = document.createElement('img');
-
-          img.src = item;
-
-          img.alt = `Foto ${number}`;
-
-          img.classList.add('momento-image');
-
-          img.onerror = function () {
-
-            img.style.display = 'none';
-
-            const errorText = document.createElement('p');
-
-            errorText.classList.add('post-content');
-
-            errorText.textContent = `Foto ${number} não encontrada`;
-
-            errorText.style.color = '#ff4444';
-
-            postIt.appendChild(errorText);
-
-          };
-
-
-
-          postIt.innerHTML = `<span class="post-number">#${number}</span>`;
-
-          postIt.appendChild(img);
-
-
-
-          postIt.addEventListener('click', function () {
-
-            modalImage.src = item;
-
-            modal.style.display = 'flex';
-
-          });
-
-        } else {
-
-          postIt.innerHTML = `
-
-                        <span class="post-number">#${number}</span>
-
-                        <p class="post-content">${item}</p>
-
-                    `;
-
+    <!-- NOVA SEÇÃO: Contagem Regressiva e Carta -->
+    <div class="countdown-section">
+        <div class="countdown-container">
+            <div class="photo-countdown-wrapper">
+                <!-- Container da Foto -->
+                <div class="photo-container">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                            <!-- Ícone de placeholder - você substituirá por uma imagem -->
+                            <div style="font-size: 48px; color: #667eea;"></div>
+                            <img src="euenenenatal.png" alt="Nós dois no Natal"
+                                style="width: 100%; height: 100%; object-fit: cover; object-position: center 70%;">
+                        </div>
+                    </div>
+                    <p>Nosso amor em um clique</p>
+                </div>
+
+                <!-- Contagem Regressiva -->
+                <div class="countdown-display">
+                    <h2 class="countdown-title">⏳ Contagem para te ver novamente</h2>
+                    <div class="countdown-timer" id="countdown-timer">
+                        <div class="countdown-unit">
+                            <div class="countdown-number" id="days">00</div>
+                            <div class="countdown-label">Dias</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-number" id="hours">00</div>
+                            <div class="countdown-label">Horas</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-number" id="minutes">00</div>
+                            <div class="countdown-label">Minutos</div>
+                        </div>
+                        <div class="countdown-unit">
+                            <div class="countdown-number" id="seconds">00</div>
+                            <div class="countdown-label">Segundos</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; color: #667eea; font-weight: 500;">
+                        Até 21 de janeiro, quando você volta do Japão! ✈️
+                    </p>
+                </div>
+            </div>
+
+            <!-- Carta -->
+            <div class="letter-container">
+                <div class="letter-header">
+                    <h2 class="letter-title">Para Minha Amada</h2>
+                    <div class="letter-date" id="current-date"></div>
+                </div>
+
+                <div class="letter-content">
+                    Dino,<br><br>
+                    Posso dizer com propriedade, tal é o privilégio de ter tua companhia ao meu lado como parceira, que
+                    nossa trajetória tem sido linda e enfeitada de momentos únicos.<br><br>
+                    Sou muito grato por ti e pelo Samuel do passado, por ter entrado de cara nesse relacionamento e ter
+                    a oportunidade de viver tudo isso.<br><br>
+                    Não pense um segundo que não fiquei feliz com tua viagem, apesar dos claros indícios de nervosismo
+                    enquanto ela se aproxima. Não pense nem mais um segundo que não quero estar ao teu lado e que não
+                    sou completamente apaixonado por ti.<br><br>
+                    É maravilhosa a capacidade que o amor tem de transformar mudanças e aprendizados de forma leve e com
+                    propósito. E tenho aprendido muito contigo.<br><br>
+                    Eu te quero mais e quero viver muito mais ao teu lado.<br><br>
+                    Estar próximo da tua família e conhecer mais do teu universo tem sido demais, e fico muito feliz que
+                    seja recíproco pra ti essa entrada no meu universo.<br><br>
+                    Quero conhecer teus amigos, teus gatos de São Paulo e, cada vez mais, descobrir a caixinha de
+                    surpresa que tu é.<br><br>
+                    Temos dois filhos lindos, e esse sentimento paterno, pois agora sou de fato pai, surgiu de tanto
+                    observar todo teu amor e dedicação aos bichinhos.<br><br>
+                    Tenho muita sorte em te ter, assim como o Vavo e a Nami têm de ter a mamãe.<br><br>
+                    Quero desbravar o Brasil e o mundo contigo e tenho certeza que, com paciência, o mundo é
+                    nosso.<br><br>
+                    Pode parecer às vezes, pois de fato sou muito agitado, mas não tenho pressa e quero aproveitar cada
+                    momento que posso ao teu lado, pois contigo eu tenho um novo significado do que é viver e a vida tem
+                    mais sabor ao teu lado.
+                </div>
+
+                <div class="letter-signature">
+                    Com todo meu amor,<br>
+                    Samuel.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para imagens (mantido do original) -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" class="modal-content">
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // Dados originais do mural
+        const items = [
+            "Tu é gentil e carismática.",
+            "Teu sorriso ilumina.",
+            "Amo teu jeito de ser.",
+            "A forma como tu cuida de quem ama.",
+            "Teu senso de humor.",
+            "A tua determinação em tudo que faz.",
+            "O som da tua risada e a tua gengivinha.",
+            "Tu é incrivelmente inteligente.",
+            "Teus abraços são o meu lugar favorito no mundo.",
+            "A maneira como tu me faz sentir amado e seguro.",
+            "Tua paixão pela vida é contagiante.",
+            "Tu me ensina algo novo todos os dias.",
+            "nenes.png",
+            "A tua paciência é admirável.",
+            "Teus olhos são lindos e expressivos.",
+            "Tu tem um coração enorme.",
+            "Eu amo conversar contigo sobre tudo e nada.",
+            "Tu me motiva a ser uma pessoa melhor.",
+            "Teu cheiro é o melhor do mundo.",
+            "nene.png",
+            "A tua sinceridade é rara e preciosa.",
+            "Tu é a minha melhor amiga e confidente.",
+            "Amo a tua voz.",
+            "Amo como tu te dedica a me ajudar",
+            "Me sinto completo ao teu lado.",
+            "Tu é linda e estiosa.",
+            "A nossa história é a minha favorita.",
+            "Teu jeito de enxergar a vida me encanta.",
+            "Me faz rir mesmo nos dias difíceis.",
+            "Tu é meu porto seguro, minha cúmplice.",
+            "Tu me inspira.",
+            "Tu é uma ótima mãe para os nossos filhos.",
+            "Gosto de como tu me olha.",
+            "Tu transforma o comum em extraordinário.",
+            "Amo acordar e ver tu ao meu lado.",
+            "Eu amo teu toque.",
+            "nois.jpg",
+            "Amo a cor que tu da pra vida das pessoas ao redor",
+            "Tu é o presente que eu nunca soube que precisava.",
+            "Amo viajar contigo.",
+            "Amo ficar em casa contigo.",
+            "Amo teu lado safada.",
+            "Amo tua firmeza.",
+            "Teu jeito de organizar as coisas.",
+            "Amo teu mexidão",
+            "Tu é minha pessoa favorita.",
+            "Me sinto livre para ser eu mesmo contigo.",
+            "Tu é a melhor companhia.",
+            "Amo a tua lealdade",
+            "Amo o jeito que tu lida com os desafios.",
+            "Teu abraço me cura.",
+            "Tu é única.",
+            "O jeito que você dança.",
+            "A tua dedicação aos teus projetos.",
+            "Tua capacidade de perdoar.",
+            "Tu é a minha alma gêmea.",
+            "Amo o silêncio confortável que temos juntos.",
+            "O teu carinho nos detalhes.",
+            "Tu é a minha maior aventura.",
+            "Simplesmente porque é a Wania!",
+        ];
+
+        const momentos = [
+            {
+                title: "A Aliança de Compromisso",
+                image: "aliancadecompromisso.jpeg",
+                description: "Passei meses me segurando pra não contar pro nenê, mas valeu a pena."
+            },
+            {
+                title: "Namizinha",
+                image: "nene.png",
+                description: "Nossa filha linda."
+            },
+            {
+                title: "Antônia parindo seus filhos",
+                image: "neneatoniaparindo.jpeg",
+                description: "Acompanhamos a gestação da Antoninha "
+            },
+            {
+                title: "Vavonaldo",
+                image: "nenes.png",
+                description: "Nosso filho peidorrágio."
+            },
+            {
+                title: "Nossa Primeira Viagem",
+                image: "nois.jpg",
+                description: "Fomos pra Tramanda e eu te pedi em namoro novamente, em meio ao mar."
+            },
+            {
+                title: "Nosso Primeiro Festival",
+                image: "nossoprimeirofestivaljuntos.jpeg",
+                description: "Turá, vimos Ney Matogrosso, Fresno, Alcione e Mano Brown"
+            },
+            {
+                title: "Primeira Vez Orquestra",
+                image: "priemireveznaorquestrajuntos.jpeg",
+                description: "Dininho me deu um ingresso de uma orquestra de aniversário"
+            },
+            {
+                title: "Primeira Foto Juntos",
+                image: "primeirafotojuntos.jpeg",
+                description: "Eu já tava gamado no dininho.."
+            },
+            {
+                title: "Primeira vez do Dininho a cavalo",
+                image: "primeiravezdoneneacavalo.jpeg",
+                description: "Linda, emo em lugares aleatórios"
+            },
+            {
+                title: "Primeiro Dia dos Namorados",
+                image: "primeirodiadosnamorados.jpeg",
+                description: "Nossa primeira celebração oficial do amor. Um dia cheio de carinho e surpresas."
+            },
+            {
+                title: "Primeiro Halloween",
+                image: "primeirohalloweenjuntos.jpeg",
+                description: "Nossas fantasias, nossas risadas e nossa primeira 'doce ou travessura' juntos."
+            },
+            {
+                title: "Primeiro Crossfit",
+                image: "primeirotorneiodecrossfitdonene.jpeg",
+                description: "O dia que ela superou limites, mostrando sua força e dedicação. Meu orgulho!"
+            },
+            {
+                title: "Quando fomos ao Abbey",
+                image: "quandofomosnoabbey.jpeg",
+                description: "O bar só tinha a gente, e era tudo o que eu precisava."
+            }
+        ];
+
+        // Elementos do DOM
+        const motivosContainer = document.getElementById('motivos-container');
+        const momentosContainer = document.getElementById('momentos-container');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        const tooltip = document.getElementById('tooltip');
+        const currentDateElement = document.getElementById('current-date');
+
+        // Elementos da contagem regressiva
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        const colors = ['pink', 'blue', 'green', 'yellow', 'purple', 'orange', 'mint', 'coral'];
+
+        // Função para criar os motivos (mantida do original)
+        function createMotivos() {
+            items.forEach((item, index) => {
+                const number = index + 1;
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                const postIt = document.createElement('div');
+                postIt.classList.add('post-it', randomColor);
+
+                const isImage = item.match(/\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i);
+
+                if (isImage) {
+                    const img = document.createElement('img');
+                    img.src = item;
+                    img.alt = `Foto ${number}`;
+                    img.classList.add('momento-image');
+                    img.onerror = function () {
+                        img.style.display = 'none';
+                        const errorText = document.createElement('p');
+                        errorText.classList.add('post-content');
+                        errorText.textContent = `Foto ${number} não encontrada`;
+                        errorText.style.color = '#ff4444';
+                        postIt.appendChild(errorText);
+                    };
+
+                    postIt.innerHTML = `<span class="post-number">#${number}</span>`;
+                    postIt.appendChild(img);
+
+                    postIt.addEventListener('click', function () {
+                        modalImage.src = item;
+                        modal.style.display = 'flex';
+                    });
+                } else {
+                    postIt.innerHTML = `
+            <span class="post-number">#${number}</span>
+            <p class="post-content">${item}</p>
+          `;
+                }
+
+                motivosContainer.appendChild(postIt);
+            });
         }
 
+        // Função para criar os momentos (mantida do original)
+        function createMomentos() {
+            momentos.forEach((momento, index) => {
+                const number = index + 1;
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
+                const postIt = document.createElement('div');
+                postIt.classList.add('post-it', randomColor);
 
-        motivosContainer.appendChild(postIt);
+                const momentoDiv = document.createElement('div');
+                momentoDiv.classList.add('momento-post');
 
-      });
+                let content = `
+          <span class="post-number">#${number}</span>
+          <div class="momento-title">${momento.title}</div>
+        `;
 
-    }
+                if (momento.image) {
+                    content += `<img src="${momento.image}" alt="${momento.title}" class="momento-image" onerror="this.style.display='none'">`;
+                }
 
+                momentoDiv.innerHTML = content;
+                postIt.appendChild(momentoDiv);
 
+                // Tooltip
+                postIt.addEventListener('mouseenter', function (e) {
+                    tooltip.textContent = momento.description;
+                    tooltip.classList.add('show');
+                });
 
-    function createMomentos() {
+                postIt.addEventListener('mousemove', function (e) {
+                    tooltip.style.left = (e.pageX + 15) + 'px';
+                    tooltip.style.top = (e.pageY - 40) + 'px';
+                });
 
-      momentos.forEach((momento, index) => {
+                postIt.addEventListener('mouseleave', function () {
+                    tooltip.classList.remove('show');
+                });
 
-        const number = index + 1;
-
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-
-
-        const postIt = document.createElement('div');
-
-        postIt.classList.add('post-it', randomColor);
-
-
-
-        const momentoDiv = document.createElement('div');
-
-        momentoDiv.classList.add('momento-post');
-
-
-
-        let content = `
-
-                    <span class="post-number">#${number}</span>
-
-                    <div class="momento-title">${momento.title}</div>
-
-                `;
-
-
-
-        if (momento.image) {
-
-          content += `<img src="${momento.image}" alt="${momento.title}" class="momento-image" onerror="this.style.display='none'">`;
-
+                momentosContainer.appendChild(postIt);
+            });
         }
 
+        function updateCountdown() {
+            const now = new Date();
+            let targetYear = now.getFullYear();
+            const targetDate = new Date(targetYear, 0, 21);
 
+            if (now > targetDate) {
+                targetYear += 1;
+                targetDate.setFullYear(targetYear);
+            }
 
-        momentoDiv.innerHTML = content;
+            const diff = targetDate - now;
 
-        postIt.appendChild(momentoDiv);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+            daysElement.textContent = days.toString().padStart(2, '0');
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
 
+            if (seconds === 59) {
+                secondsElement.style.animation = 'pulse 0.5s';
+                setTimeout(() => {
+                    secondsElement.style.animation = '';
+                }, 500);
+            }
+        }
 
-        // Tooltip
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
 
-        postIt.addEventListener('mouseenter', function (e) {
+            const formatter = new Intl.DateTimeFormat('pt-BR', options);
+            const formattedDate = formatter.format(now);
 
-          tooltip.textContent = momento.description;
+            currentDateElement.textContent = formattedDate;
+        }
 
-          tooltip.classList.add('show');
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carregar o mural original
+            createMotivos();
+            createMomentos();
 
+            // Atualizar data atual
+            updateCurrentDate();
+
+            // Iniciar contagem regressiva
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Atualizar a data a cada minuto
+            setInterval(updateCurrentDate, 60000);
         });
 
-
-
-        postIt.addEventListener('mousemove', function (e) {
-
-          tooltip.style.left = (e.pageX + 15) + 'px';
-
-          tooltip.style.top = (e.pageY - 40) + 'px';
-
+        // Event listeners para o modal (mantidos do original)
+        closeModal.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
         });
-
-
-
-        postIt.addEventListener('mouseleave', function () {
-
-          tooltip.classList.remove('show');
-
-        });
-
-
-
-        momentosContainer.appendChild(postIt);
-
-      });
-
-    }
-
-
-
-    // Event listeners
-
-    closeModal.addEventListener('click', () => modal.style.display = 'none');
-
-    modal.addEventListener('click', (e) => {
-
-      if (e.target === modal) modal.style.display = 'none';
-
-    });
-
-
-
-    // Inicialização - carrega tudo automaticamente
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-      createMotivos();
-
-      createMomentos();
-
-    });
-
-  </script>
-
+    </script>
 </body>
 
 </html>
-
-
